@@ -1,0 +1,21 @@
+# Ignore compiled Python files
+__pycache__/
+*.pyc
+
+# Ignore logs
+logs/
+*.log
+
+# Ignore environment files
+.env
+.pt
+
+# Ignore node modules (for JS/TS projects)
+node_modules/
+
+# Ignore specific file
+homeo_tokenizer.json
+homeo_corpus.txt
+# Ignore a folder
+temp_data/
+medicines_data/
