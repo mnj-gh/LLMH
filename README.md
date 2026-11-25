@@ -44,27 +44,21 @@ tests/                    unit tests (no GPU or model download needed)
 docs/                     project report, figures and a short app demo video
 ```
 
+## Base model
+
+HFT starts from [`bharatgenai/Param-1-2.9B-Instruct`](https://huggingface.co/bharatgenai/Param-1-2.9B-Instruct), a 2.9B-parameter bilingual instruction-tuned model, which is fully fine-tuned (no adapters) in both stages. Stage 1 produces `mnj-hf/homeopathy`; stage 2 continues from that checkpoint and produces `mnj-hf/homeopathy-chat`.
+
 ## Quick start
 
 ```bash
 pip install -r requirements.txt
 python -m pytest tests                      # data handling and label masking
 
-# 1. generate Q&A pairs from remedy texts (needs your own keys)
-export GEMINI_API_KEYS=key1,key2            # or --keys-file keys.txt
-python pipeline/generate_qa_gemini.py --help
-
-# 2. check the data, then train (GPU required)
-python tools/check_jsonl.py train1.jsonl train2.jsonl
-python -m hft.train_qa --data train1.jsonl train2.jsonl train3.jsonl --no-push
-python -m hft.train_dialogue --data dialogues.jsonl --init-model ./hft_qa --no-push
-
-# 3. talk to the model
-python -m hft.chat --model ./hft_chat
-streamlit run app/app.py                    # chat UI (downloads mnj-hf/homeopathy-chat)
+python -m hft.chat --model mnj-hf/homeopathy-chat   # terminal consultation
+streamlit run app/app.py                            # chat UI
 ```
 
-A 2-minute walkthrough of the chat UI is in [`docs/app_demo.mp4`](docs/app_demo.mp4).
+A 2-minute walkthrough of the chat UI is in [`docs/app_demo.mp4`](docs/app_demo.mp4). The training entry points are `hft/train_qa.py` (stage 1) and `hft/train_dialogue.py` (stage 2).
 
 ### Data formats
 
@@ -75,10 +69,6 @@ A 2-minute walkthrough of the chat UI is in [`docs/app_demo.mp4`](docs/app_demo.
 ## Authors
 
 M. Naga Jahnavi, V. Satya Sri and V. Drithi, under the guidance of Dr. Tigulla Swathi, Department of CSE (AI & ML), Neil Gogte Institute of Technology, Hyderabad. The chat UI and the dialogue generator come from Satya Sri's repository, [Homeopathic-Finetuned-Transformer](https://github.com/SatyaSriVelpuri/Homeopathic-Finetuned-Transformer).
-
-## Data is not included
-
-The Q&A pairs and the dialogues are not part of this repository. They are derived from published Materia Medica texts and generated with commercial APIs, so regenerate them with the pipeline and the sources listed in `data_collection/sources.txt`, after checking each source's terms of use. API keys are only ever read from the environment or a local key file, and both are git-ignored.
 
 ## Status and limitations
 
