@@ -4,7 +4,18 @@ A homeopathy-specific language model built by fine-tuning **Param-1-2.9B-Instruc
 
 > **Decision support only.** HFT does not diagnose and does not replace professional clinical judgment. It can state plausible but incorrect things, especially when a case description is thin.
 
-![Two-stage pipeline](docs/figures/two_stage_pipeline.png)
+## Demo
+
+- [App walkthrough video](https://drive.google.com/file/d/1Cb150GDLR7xQPECRNI-rskGaC0kPGdCI/view?usp=sharing)
+- [Project demo video](https://drive.google.com/file/d/1roqNOSF0FkIbUAadQSiZydS4QbMACw0A/view?usp=sharing)
+
+**Multi-turn consultation**
+
+![Multi-turn consultation](docs/figures/demo_multiturn.png)
+
+**Remedy suggestion with clinical reasoning**
+
+![Remedy suggestion](docs/figures/demo_remedy_reasoning.png)
 
 ## How it works
 
@@ -41,34 +52,18 @@ data_collection/
   sources.txt               the seven source indexes
 tools/check_jsonl.py      validate files and report token lengths
 tests/                    unit tests (no GPU or model download needed)
-docs/                     project report, figures and a short app demo video
+docs/                     project report and figures
 ```
 
 ## Base model
 
 HFT starts from [`bharatgenai/Param-1-2.9B-Instruct`](https://huggingface.co/bharatgenai/Param-1-2.9B-Instruct), a 2.9B-parameter bilingual instruction-tuned model, which is fully fine-tuned (no adapters) in both stages. Stage 1 produces `mnj-hf/homeopathy`; stage 2 continues from that checkpoint and produces `mnj-hf/homeopathy-chat`.
 
-## Quick start
-
-```bash
-pip install -r requirements.txt
-python -m pytest tests                      # data handling and label masking
-
-python -m hft.chat --model mnj-hf/homeopathy-chat   # terminal consultation
-streamlit run app/app.py                            # chat UI
-```
-
-A 2-minute walkthrough of the chat UI is in [`docs/app_demo.mp4`](docs/app_demo.mp4). The training entry points are `hft/train_qa.py` (stage 1) and `hft/train_dialogue.py` (stage 2).
-
-### Data formats
+## Data formats
 
 - **Stage 1** is one json object per line with a `text` field of tagged content:
   `<medicine>..</medicine> <context>..</context> <user>..</user> <actual response>..</actual response>`.
 - **Stage 2** is one json object per line: `{"messages": [{"role": "system"|"user"|"assistant", "content": "..."}, ...]}`.
-
-## Authors
-
-M. Naga Jahnavi, V. Satya Sri and V. Drithi, under the guidance of Dr. Tigulla Swathi, Department of CSE (AI & ML), Neil Gogte Institute of Technology, Hyderabad. The chat UI and the dialogue generator come from Satya Sri's repository, [Homeopathic-Finetuned-Transformer](https://github.com/SatyaSriVelpuri/Homeopathic-Finetuned-Transformer).
 
 ## Status and limitations
 

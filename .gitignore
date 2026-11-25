@@ -15,4 +15,3 @@ final_finetuned_model/
 *.safetensors
 *.bin
 *.mp4
-!docs/app_demo.mp4
