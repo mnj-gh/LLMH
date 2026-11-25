@@ -18,6 +18,8 @@ A homeopathy-specific language model built by fine-tuning **Param-1-2.9B-Instruc
 
 ## How it works
 
+![HFT architecture](docs/figures/architecture_overview.png)
+
 | Stage | Data | Purpose | Key settings |
 |---|---|---|---|
 | 1. Knowledge | ~100k Q&A pairs from 7 Materia Medica texts | Remedy profiles, symptoms, modalities | full fine-tune, 3 epochs, lr 2e-5, bf16, max length 512 |
