@@ -6,8 +6,7 @@ A homeopathy-specific language model built by fine-tuning **Param-1-2.9B-Instruc
 
 ## Demo
 
-- [App walkthrough video](https://drive.google.com/file/d/1Cb150GDLR7xQPECRNI-rskGaC0kPGdCI/view?usp=sharing)
-- [Project demo video](https://drive.google.com/file/d/1roqNOSF0FkIbUAadQSiZydS4QbMACw0A/view?usp=sharing)
+[Demo video](https://drive.google.com/file/d/1Cb150GDLR7xQPECRNI-rskGaC0kPGdCI/view?usp=sharing)
 
 **Multi-turn consultation**
 
