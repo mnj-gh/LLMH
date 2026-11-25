@@ -33,13 +33,15 @@ hft/                      training and inference package
 pipeline/
   generate_qa_gemini.py   Q&A generation with Gemini (structured JSON, key rotation, resume)
   generate_qa_groq.py     Q&A generation with Groq
+  generate_dialogues_gemini.py  multi-turn consultation generation with Gemini (key rotation, resume)
+app/app.py                Streamlit chat UI for the deployed model
 data_collection/
   scrape_materia_medica.py  Scrapy spider for remedy texts
   clean_to_json.py          whitespace clean-up into one json
   sources.txt               the seven source indexes
 tools/check_jsonl.py      validate files and report token lengths
 tests/                    unit tests (no GPU or model download needed)
-docs/                     project report and figures
+docs/                     project report, figures and a short app demo video
 ```
 
 ## Quick start
@@ -59,13 +61,20 @@ python -m hft.train_dialogue --data dialogues.jsonl --init-model ./hft_qa --no-p
 
 # 3. talk to the model
 python -m hft.chat --model ./hft_chat
+streamlit run app/app.py                    # chat UI (downloads mnj-hf/homeopathy-chat)
 ```
+
+A 2-minute walkthrough of the chat UI is in [`docs/app_demo.mp4`](docs/app_demo.mp4).
 
 ### Data formats
 
 - **Stage 1** is one json object per line with a `text` field of tagged content:
   `<medicine>..</medicine> <context>..</context> <user>..</user> <actual response>..</actual response>`.
 - **Stage 2** is one json object per line: `{"messages": [{"role": "system"|"user"|"assistant", "content": "..."}, ...]}`.
+
+## Authors
+
+M. Naga Jahnavi, V. Satya Sri and V. Drithi, under the guidance of Dr. Tigulla Swathi, Department of CSE (AI & ML), Neil Gogte Institute of Technology, Hyderabad. The chat UI and the dialogue generator come from Satya Sri's repository, [Homeopathic-Finetuned-Transformer](https://github.com/SatyaSriVelpuri/Homeopathic-Finetuned-Transformer).
 
 ## Data is not included
 
