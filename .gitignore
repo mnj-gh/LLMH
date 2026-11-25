@@ -1,21 +1,17 @@
-# Ignore compiled Python files
 __pycache__/
 *.pyc
-
-# Ignore logs
-logs/
-*.log
-
-# Ignore environment files
 .env
-.pt
-
-# Ignore node modules (for JS/TS projects)
-node_modules/
-
-# Ignore specific file
-homeo_tokenizer.json
-homeo_corpus.txt
-# Ignore a folder
-temp_data/
+keys.txt
+api_keys.txt
+*.jsonl
+!tests/**/*.jsonl
 medicines_data/
+checkpoint.json
+low_confidence_review.jsonl
+pipeline_summary.json
+hft_qa/
+hft_chat/
+final_finetuned_model/
+*.safetensors
+*.bin
+*.mp4
